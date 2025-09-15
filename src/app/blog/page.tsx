@@ -1,87 +1,67 @@
-"use client";
-import React, { useRef, useEffect, useState } from "react";
-import { gsap } from "gsap";
-import SideBar from "../sidebar";
+import fs from 'fs';
+import path from 'path';
+import SideBar from '../sidebar';
 
-interface BlogPost {
-  slug: string;
-  title: string;
-  description: string;
-  date: string;
-  thumbnail?: string;
-  tags: string[];
-  readTime: string;
+interface BlogPostFrontmatter { title?: string; description?: string; date?: string; tags?: string[]; thumbnail?: string; readTime?: string; }
+interface BlogPost { slug: string; title: string; description: string; date: string; tags: string[]; thumbnail?: string; readTime: string; }
+
+const contentDir = path.join(process.cwd(), 'src', 'app', 'blog', 'content', 'blog');
+
+function parseFrontmatter(raw: string): { data: BlogPostFrontmatter; body: string } {
+  const match = raw.match(/^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/);
+  if (!match) return { data: {}, body: raw };
+  const fm = match[1];
+  const body = match[2];
+  const data: BlogPostFrontmatter = {};
+  fm.split('\n').forEach(line => {
+    const idx = line.indexOf(':');
+    if (idx === -1) return;
+    const key = line.slice(0, idx).trim();
+    let value = line.slice(idx + 1).trim();
+    if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) value = value.slice(1, -1);
+    if (value.startsWith('[') && value.endsWith(']')) (data as any)[key] = value.slice(1, -1).split(',').map(v => v.trim().replace(/['"]/g, ''));
+    else (data as any)[key] = value;
+  });
+  return { data, body };
+}
+
+function calcReadTime(body: string) { const words = body.trim().split(/\s+/).length; return `${Math.max(1, Math.ceil(words/200))} min read`; }
+
+function getAllPosts(): BlogPost[] {
+  if (!fs.existsSync(contentDir)) return [];
+  return fs.readdirSync(contentDir)
+    .filter(f => f.endsWith('.md'))
+    .map(f => {
+      const slug = f.replace(/\.md$/, '');
+      const raw = fs.readFileSync(path.join(contentDir, f), 'utf8');
+      const { data, body } = parseFrontmatter(raw);
+      return {
+        slug,
+        title: data.title || slug,
+        description: data.description || '',
+        date: data.date || new Date().toISOString().split('T')[0],
+        tags: Array.isArray(data.tags) ? data.tags : [],
+        thumbnail: data.thumbnail || '/blog/thumbnails/default.jpg',
+        readTime: data.readTime || calcReadTime(body)
+      } as BlogPost;
+    })
+    .sort((a,b)=> new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
 export default function Blog() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const gridRef = useRef<HTMLDivElement>(null);
-  const [posts, setPosts] = useState<BlogPost[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchBlogPosts = async () => {
-      try {
-        const response = await fetch('/api/blog');
-        const data = await response.json();
-        setPosts(data);
-      } catch (error) {
-        console.error('Error fetching blog posts:', error);
-        setPosts([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchBlogPosts();
-  }, []);
-
-  useEffect(() => {
-    if (!loading && posts.length > 0) {
-      // Animate title
-      gsap.fromTo(titleRef.current, 
-        { y: 50, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" }
-      );
-
-      // Animate blog cards
-      const cards = gridRef.current?.children;
-      if (cards) {
-        gsap.fromTo(Array.from(cards), 
-          { y: 100, opacity: 0 },
-          { 
-            y: 0, 
-            opacity: 1, 
-            duration: 0.6, 
-            stagger: 0.1,
-            delay: 0.3,
-            ease: "power2.out" 
-          }
-        );
-      }
-    }
-  }, [loading, posts]);
-
-  const handleCardClick = (slug: string) => {
-    window.location.href = `/blog/${slug}`;
-  };
+  const posts = getAllPosts();
 
   return (
     <div className="relative bg-black text-white min-h-screen font-[family-name:var(--font-geist-sans)]">
       <SideBar />
       
       <div 
-        ref={containerRef}
         className="relative z-10 p-8 pt-16"
         style={{ transform: 'translateX(-80px)' }}
       >
         {/* Header */}
         <div className="text-center mb-16">
-          <h1 
-            ref={titleRef}
-            className="text-5xl md:text-7xl font-bold mb-4 tracking-wide"
-          >
+          <h1 className="text-5xl md:text-7xl font-bold mb-4 tracking-wide">
             Blog
           </h1>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
@@ -89,24 +69,16 @@ export default function Blog() {
           </p>
         </div>
 
-        {/* Loading State */}
-        {loading && (
-          <div className="flex justify-center items-center min-h-[400px]">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
-          </div>
-        )}
-
         {/* Blog Grid */}
-        {!loading && (
+        {posts.length > 0 && (
           <div 
-            ref={gridRef}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto"
           >
             {posts.map((post) => (
-              <article
+              <a
                 key={post.slug}
-                className="group cursor-pointer bg-zinc-900 rounded-lg overflow-hidden border border-zinc-800 hover:border-zinc-600 transition-all duration-300 hover:scale-105 hover:shadow-2xl"
-                onClick={() => handleCardClick(post.slug)}
+                href={`/blog/${post.slug}`}
+                className="group block bg-zinc-900 rounded-lg overflow-hidden border border-zinc-800 hover:border-zinc-600 transition-all duration-300 hover:scale-105 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 {/* Thumbnail */}
                 <div className="aspect-video overflow-hidden">
@@ -114,12 +86,6 @@ export default function Blog() {
                     src={post.thumbnail}
                     alt={post.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    onError={(e) => {
-                      // Fallback to a gradient if image fails to load
-                      const target = e.target as HTMLImageElement;
-                      target.style.display = 'none';
-                      target.parentElement!.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
-                    }}
                   />
                 </div>
 
@@ -142,7 +108,15 @@ export default function Blog() {
                   </h2>
 
                   {/* Description */}
-                  <p className="text-gray-300 text-sm leading-relaxed mb-4 line-clamp-3">
+                  <p
+                    className="text-gray-300 text-sm leading-relaxed mb-4"
+                    style={{
+                      display: '-webkit-box',
+                      WebkitLineClamp: 3,
+                      WebkitBoxOrient: 'vertical',
+                      overflow: 'hidden'
+                    }}
+                  >
                     {post.description}
                   </p>
 
@@ -158,27 +132,19 @@ export default function Blog() {
                     ))}
                   </div>
                 </div>
-              </article>
+              </a>
             ))}
           </div>
         )}
 
         {/* Empty State */}
-        {!loading && posts.length === 0 && (
+        {posts.length === 0 && (
           <div className="text-center py-16">
             <p className="text-xl text-gray-400">No blog posts found.</p>
           </div>
         )}
       </div>
 
-      <style jsx>{`
-        .line-clamp-3 {
-          display: -webkit-box;
-          -webkit-line-clamp: 3;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-        }
-      `}</style>
     </div>
   );
 }

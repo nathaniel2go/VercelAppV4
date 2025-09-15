@@ -5,7 +5,30 @@ import { useRouter } from "next/navigation";
 import SideBar from "../../sidebar";
 
 // ========== PORTFOLIO CONFIGURATION - EASY TO EDIT ==========
-const PORTFOLIO_CONFIG = {
+interface PortfolioConfig {
+  title: string;
+  subtitle?: string;
+  description?: string;
+  gridLayout: 'masonry' | 'grid' | 'uniform';
+  showImageNumbers: boolean;
+  showCaptions: boolean;
+  backgroundColor?: string;
+  heroImage?: string;
+  projectDetails?: {
+    date?: string;
+    location?: string;
+    equipment?: string[];
+  } | null;
+  images: Array<{
+    id: string;
+    title: string;
+    description: string;
+    src: string;
+    alt: string;
+  }>;
+}
+
+const PORTFOLIO_CONFIG: PortfolioConfig = {
   // Page Info
   title: "Studio",
   subtitle: "",

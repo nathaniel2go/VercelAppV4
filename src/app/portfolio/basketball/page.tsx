@@ -5,7 +5,30 @@ import { useRouter } from "next/navigation";
 import SideBar from "../../sidebar";
 
 // ========== PORTFOLIO CONFIGURATION - EASY TO EDIT ==========
-const PORTFOLIO_CONFIG = {
+interface PortfolioConfig {
+  title: string;
+  subtitle?: string;
+  description?: string;
+  gridLayout: 'masonry' | 'grid' | 'uniform';
+  showImageNumbers: boolean;
+  showCaptions: boolean;
+  backgroundColor?: string;
+  heroImage?: string;
+  projectDetails?: {
+    date?: string;
+    location?: string;
+    equipment?: string[];
+  };
+  images: Array<{
+    id: string;
+    title: string;
+    description: string;
+    src: string;
+    alt: string;
+  }>;
+}
+
+const PORTFOLIO_CONFIG: PortfolioConfig = {
   // Page Info
   title: "Redmen Basketball 2025",
   subtitle: "Capturing Love Stories",
@@ -23,11 +46,7 @@ const PORTFOLIO_CONFIG = {
   heroImage: "", // Leave empty to hide hero, or add image URL
   
   // Project Details (leave empty to hide section)
-  projectDetails: {
-    /*date: "2024",
-    location: "Various locations", 
-    equipment: ["Canon EOS R6", "35mm f/1.4", "85mm f/1.8"]*/
-  },
+  projectDetails: undefined, // Add details to enable the section
   
   // Images Array
   images: [
