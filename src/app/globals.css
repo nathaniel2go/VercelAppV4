@@ -24,3 +24,145 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Mobile-specific margin fixes */
+@media (max-width: 768px) {
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  body {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    width: 100vw;
+    overflow-x: hidden;
+  }
+  
+  /* Fix any container margins on mobile */
+  .relative, main, section, div {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  
+  /* Force homepage title and subtitle centering on mobile */
+  main h1, main p {
+    text-align: center !important;
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    display: block !important;
+  }
+  
+  /* Ensure the main content container is properly centered */
+  main {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    width: 100vw !important;
+    margin: 0 !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+  
+  /* Center the text container */
+  main > div {
+    width: 100% !important;
+    text-align: center !important;
+    margin: 0 auto !important;
+  }
+}
+
+/* Custom animations */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
+/* Blog-specific styles */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Blog prose styles */
+.blog-prose {
+  color: #e5e5e5;
+  line-height: 1.7;
+}
+
+.blog-prose h1, 
+.blog-prose h2, 
+.blog-prose h3 {
+  color: #ffffff;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.blog-prose h1 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.blog-prose h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.blog-prose h3 {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.blog-prose p {
+  margin-bottom: 1.5rem;
+}
+
+.blog-prose ul {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.blog-prose li {
+  margin-bottom: 0.5rem;
+  list-style-type: disc;
+}
+
+.blog-prose strong {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.blog-prose em {
+  font-style: italic;
+}
+
+.blog-prose blockquote {
+  border-left: 4px solid #3b82f6;
+  padding-left: 1rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: #d1d5db;
+}
+
+.blog-prose code {
+  background-color: #374151;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+}
