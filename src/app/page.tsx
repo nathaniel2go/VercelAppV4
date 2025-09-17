@@ -679,10 +679,13 @@ export default function Home() {
                 ref={aboutTextRef}
                 className="text-lg text-white-300 mb-8 leading-relaxed"
               >
-                I'm a passionate photographer with over 8 years of experience capturing life's most 
-                precious moments. From intimate weddings to dynamic lifestyle shoots, I believe every 
-                frame tells a story worth preserving. My approach combines technical expertise with 
-                genuine human connection, creating images that resonate long after the moment has passed.
+                I'm a full time student who is passionate about learning and creating
+                whenever the opportunity arises. Entering my second year in the
+                University of Waterloo's Systems Design Engineering program, I am
+                constantly approaching a mix or technical understand, attention to detail,
+                and creativity. Whether it be in video, photography, or other professional 
+                opportunities, I am excited to see more and do more.
+                
               </p>
 
               {/* Social Icons */}
