@@ -7,7 +7,7 @@ import SideBar from "./sidebar";
 const imageCategories = {
   nature: Array.from({ length: 21 }, (_, i) => `/portfolio/nature/image${i + 1}.jpg`), 
   basketball: Array.from({ length: 36 }, (_, i) => `/portfolio/basketball/image${i + 1}.jpg`), 
-  people: Array.from({ length: 18 }, (_, i) => `/portfolio/people/image${i + 1}.jpg`), 
+  people: Array.from({ length: 20 }, (_, i) => `/portfolio/people/image${i + 1}.jpg`), 
   sports: Array.from({ length: 16 }, (_, i) => `/portfolio/sports/image${i + 1}.jpg`), 
   studio: Array.from({ length: 15 }, (_, i) => `/portfolio/studio/image${i + 1}.jpg`), 
   wedding: Array.from({ length: 21 }, (_, i) => `/portfolio/wedding/image${i + 1}.jpg`), 

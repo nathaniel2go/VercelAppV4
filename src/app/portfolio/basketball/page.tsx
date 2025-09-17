@@ -31,8 +31,6 @@ interface PortfolioConfig {
 const PORTFOLIO_CONFIG: PortfolioConfig = {
   // Page Info
   title: "Redmen Basketball 2025",
-  subtitle: "Capturing Love Stories",
-  description: "Documenting the beauty and emotion of weddings",
 
   // Layout Settings
   gridLayout: "masonry", // "masonry" | "grid" | "uniform"
@@ -150,24 +148,22 @@ export default function LifestylePortfolio() {
     <div className="min-h-screen bg-background text-foreground" style={{ backgroundColor: PORTFOLIO_CONFIG.backgroundColor || '' }}>
       <SideBar />
       
-      {/* Header */}
-      <header className="w-full py-6 px-8 border-b border-black/10 dark:border-white/10 flex items-center justify-between">
-        <div>
-          <button 
-            onClick={() => router.back()}
-            className="text-sm text-foreground/60 hover:text-foreground mb-2 flex items-center gap-2"
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-            Back to Portfolio
-          </button>
-          <h1 className="text-3xl font-bold">{PORTFOLIO_CONFIG.title}</h1>
-          {PORTFOLIO_CONFIG.subtitle && (
-            <p className="text-lg text-foreground/70 mt-1">{PORTFOLIO_CONFIG.subtitle}</p>
-          )}
+      {/* Header: centered title, right-aligned back button */}
+      <header className="w-full py-6 px-10 md:px-16 border-b border-black/10 dark:border-white/10">
+        <div className="grid grid-cols-1 md:grid-cols-3 items-center">
+          <div className="hidden md:block" />
+          <h1 className="text-2xl md:text-3xl font-bold text-center break-words whitespace-normal w-full">
+            {PORTFOLIO_CONFIG.title}
+          </h1>
+          <div className="hidden md:block justify-self-end pr-12 md:pr-24">
+            <button
+              onClick={() => router.push("/portfolio")}
+              className="text-sm text-foreground/60 hover:text-foreground"
+            >
+              Back to Portfolio
+            </button>
+          </div>
         </div>
-        <span className="text-sm text-foreground/60">{PORTFOLIO_CONFIG.subtitle || PORTFOLIO_CONFIG.description}</span>
       </header>
 
       {/* Hero Section (Optional) */}
@@ -503,3 +499,4 @@ export default function LifestylePortfolio() {
     </div>
   );
 }
+

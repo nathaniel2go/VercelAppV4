@@ -224,6 +224,14 @@ export default function SideBar() {
 
       {/* Global CSS for site margins and animations */}
       <style jsx global>{`
+        /* Make the page background dark to remove the white strip on the left */
+        :root {
+          color-scheme: dark;
+        }
+        html, body {
+          background-color: #0b0b0b;
+        }
+
         @keyframes pulseArrow {
           0%, 100% {
             transform: translate(-50%, -50%) translateX(0px);
@@ -242,8 +250,9 @@ export default function SideBar() {
             width: 100vw;
             margin: 0;
             padding: 0;
+            /* keep dark background for the padded area */
+            background-color: #0b0b0b;
           }
-          
           body {
             padding-left: 160px; /* Total sidebar space */
           }
@@ -284,6 +293,8 @@ export default function SideBar() {
           body {
             margin-left: 0;
             padding-left: 0;
+            /* keep dark background on mobile too */
+            background-color: #0b0b0b;
           }
           
           main, .main-content, [class*="page"], [class*="container"] {
@@ -326,10 +337,9 @@ export default function SideBar() {
           zIndex: 1000,
           pointerEvents: (isMobile ? mobileMenuOpen : visible) ? "auto" : "none",
           boxShadow: (isMobile ? mobileMenuOpen : visible) ? "2px 0 16px rgba(0,0,0,0.12)" : "none",
-          color: "#fff",
+          color: "#ffffff",
           overflow: "hidden",
-          opacity: (isMobile ? mobileMenuOpen : visible) ? 1 : 0,
-          transition: "opacity 0.35s ease-in-out",
+          backgroundColor: "#18181b",
           transform: isMobile ? `translateX(${mobileMenuOpen ? 0 : -SIDEBAR_WIDTH}px)` : "none",
         }}
       >
