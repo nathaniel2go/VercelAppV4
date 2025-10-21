@@ -7,6 +7,13 @@ import SideBar from "../sidebar";
 // Portfolio categories data
 const portfolioCategories = [
 	{
+		id: "Automotive",
+		title: "Automotive",
+		description: "Capturing love and emotion in every frame",
+		image: "/portfolio/automotive/thumbnail.jpg",
+		route: "/portfolio/automotive",
+	},
+	{
 		id: "Studio",
 		title: "Studio",
 		description: "Capturing love and emotion in every frame",
