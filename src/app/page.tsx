@@ -11,6 +11,7 @@ const imageCategories = {
   sports: Array.from({ length: 16 }, (_, i) => `/portfolio/sports/image${i + 1}.jpg`), 
   studio: Array.from({ length: 15 }, (_, i) => `/portfolio/studio/image${i + 1}.jpg`), 
   wedding: Array.from({ length: 21 }, (_, i) => `/portfolio/wedding/image${i + 1}.jpg`), 
+  cars: Array.from({ length: 50 }, (_, i) => `/portfolio/automotive/${i + 1}.jpg`),
 };
 
 // Fallback images that definitely exist (using the ones from your original code)
@@ -31,6 +32,7 @@ const availableImages = [
   ...imageCategories.sports,
   ...imageCategories.studio,
   ...imageCategories.wedding,
+  ...imageCategories.cars,
   ...fallbackImages, // Include fallbacks to ensure we have working images
 ].filter((img, index, arr) => arr.indexOf(img) === index); // Remove duplicates
 
@@ -680,11 +682,13 @@ export default function Home() {
                 className="text-lg text-white-300 mb-8 leading-relaxed"
               >
                 I'm a full time student who is passionate about learning and creating
-                whenever the opportunity arises. Entering my second year in the
+                whenever the opportunity arises. In  my second year at the
                 University of Waterloo's Systems Design Engineering program, I am
                 constantly approaching a mix or technical understand, attention to detail,
                 and creativity. Whether it be in video, photography, or other professional 
                 opportunities, I am excited to see more and do more.
+                Profesionally, I currently have an interest in industrial product
+                design, with a focus on the human factors and consumer facing refinement.
                 
               </p>
 
@@ -732,6 +736,20 @@ export default function Home() {
                     className="w-16 h-16 rounded-full border-2 border-white/30 hover:border-white transition-all duration-300 hover:scale-110 object-cover"
                   />
                 </a>
+
+                {/* Portfolio */}
+                <a 
+                  href="https://drive.google.com/file/d/1RiTHtWisPFBvkZQHwatCGfI4Ue2kWeTR/view?usp=sharing"
+                  className="social-icon group relative block"
+                  data-social-icon="2"
+                >
+                  <img 
+                    src="/portfolio.png"
+                    alt="Portfolio"
+                    className="w-16 h-16 rounded-full border-2 border-white/30 hover:border-white transition-all duration-300 hover:scale-110 object-cover"
+                  />
+                </a>
+
               </div>
             </div>
           </div>
