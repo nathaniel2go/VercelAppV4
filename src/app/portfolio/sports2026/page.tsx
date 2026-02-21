@@ -30,7 +30,7 @@ interface PortfolioConfig {
 
 const PORTFOLIO_CONFIG: PortfolioConfig = {
   // Page Info
-  title: "Sports 2025",
+  title: "Sports 2026",
   subtitle: "",
   description: "",
 
@@ -50,11 +50,11 @@ const PORTFOLIO_CONFIG: PortfolioConfig = {
   
   // Images Array - Based on wedding folder contents (75+ images)
   images: [
-    ...Array.from({ length: 16 }, (_, i) => ({
+    ...Array.from({ length: 34 }, (_, i) => ({
       id: `sports-${i + 1}`,
-      title: `Sports Moment ${i + 1}`,
+      title: `Sports moment ${i + 1}`,
       description: "Sports Photography",
-      src: `/portfolio/sports/image${i + 1}.jpg`,
+      src: `/portfolio/sports2026/${i + 1}.jpg`,
       alt: `Sports photography image ${i + 1}`
     }))
   ]

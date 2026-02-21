@@ -7,6 +7,13 @@ import SideBar from "../sidebar";
 // Portfolio categories data
 const portfolioCategories = [
 	{
+		id: "Sports2026",
+		title: "Sports 2026",
+		description: "Capturing love and emotion in every frame",
+		image: "/portfolio/sports2026/thumbnail.jpg",
+		route: "/portfolio/sports2026",
+	},
+	{
 		id: "Automotive",
 		title: "Automotive",
 		description: "Capturing love and emotion in every frame",
@@ -34,6 +41,15 @@ const portfolioCategories = [
 		image: "/portfolio/wedding/thumbnail.jpg",
 		route: "/portfolio/wedding",
 	},
+
+	{
+		id: "People",
+		title: "People",
+		description: "Capturing love and emotion in every frame",
+		image: "/portfolio/people/thumbnail.jpg",
+		route: "/portfolio/people",
+	},
+
 	{
 		id: "Basketball",
 		title: "Basketball",
@@ -43,19 +59,13 @@ const portfolioCategories = [
 	},
 	{
 		id: "miscsports",
-		title: "Sports",
+		title: "Sports 2025",
 		description: "Capturing love and emotion in every frame",
 		image: "/portfolio/sports/thumbnail.jpg",
 		route: "/portfolio/sports",
 	},
 
-	{
-		id: "People",
-		title: "People",
-		description: "Capturing love and emotion in every frame",
-		image: "/portfolio/people/thumbnail.jpg",
-		route: "/portfolio/people",
-	},
+
 ];
 
 export default function Portfolio() {
