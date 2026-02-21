@@ -22,13 +22,6 @@ export const videoEntries: VideoEntry[] = [
     videoSrc: "/videos/Jkreception.mp4",
   },
   {
-    id: "EnglishMes",
-    title: "English Culminating Project / Short Film",
-    description: "",
-    thumbnail: "/videos/thumbnails/EnglishMes.jpg",
-    videoSrc: "/videos/EnglishMes.mp4",
-  },
-  {
     id: "KaolinPottery",
     title: "Kaolin Pottery Experience Video",
     description: "",
