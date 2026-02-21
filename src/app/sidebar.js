@@ -13,6 +13,8 @@ const subpages = [
   "Blog",
   "Contact",
   "Portfolio",
+  "Videos",
+  "Engineering Portfolio",
 ];
 
 function getWavePath(cursorY, sidebarHeight) {
@@ -373,6 +375,44 @@ export default function SideBar() {
                     onClick={e => {
                       e.preventDefault();
                       router.push("/portfolio");
+                    }}
+                    style={{
+                      color: "#fff",
+                      textDecoration: "none",
+                      fontWeight: 500,
+                      fontSize: "1.1rem",
+                      transition: "color 0.2s",
+                      display: "inline-block",
+                      minWidth: "100px",
+                    }}
+                  >
+                    {page}
+                  </a>
+                ) : page === "Videos" ? (
+                  <a
+                    href="#"
+                    onClick={e => {
+                      e.preventDefault();
+                      router.push("/videos");
+                    }}
+                    style={{
+                      color: "#fff",
+                      textDecoration: "none",
+                      fontWeight: 500,
+                      fontSize: "1.1rem",
+                      transition: "color 0.2s",
+                      display: "inline-block",
+                      minWidth: "100px",
+                    }}
+                  >
+                    {page}
+                  </a>
+                ) : page === "Engineering Portfolio" ? (
+                  <a
+                    href="#"
+                    onClick={e => {
+                      e.preventDefault();
+                      router.push("/engineering-portfolio");
                     }}
                     style={{
                       color: "#fff",
