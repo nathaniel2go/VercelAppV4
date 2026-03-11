@@ -8,6 +8,13 @@ export interface VideoEntry {
 
 export const videoEntries: VideoEntry[] = [
   {
+    id: "Audio Visualizer Device",
+    title: "Audio Spectrum Visualizer Device",
+    description: "",
+    thumbnail: "/videos/thumbnails/263Audiovisualizer.jpg",
+    videoSrc: "/videos/263Audiovisualizer.mp4",
+  },
+  {
     id: "Sydemenfctrailer2026final",
     title: "SYDEMENFC Trailer 2026",
     description: "",
