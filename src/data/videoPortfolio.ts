@@ -8,6 +8,13 @@ export interface VideoEntry {
 
 export const videoEntries: VideoEntry[] = [
   {
+    id: "All Systems Green Winter 2026",
+    title: "All Systems Green Winter 2026",
+    description: "",
+    thumbnail: "/videos/thumbnails/ASG2026.jpg",
+    videoSrc: "/videos/ASG2026.mp4",
+  },
+  {
     id: "Audio Visualizer Device",
     title: "Audio Spectrum Visualizer Device",
     description: "",
