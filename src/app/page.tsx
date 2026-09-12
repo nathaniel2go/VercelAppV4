@@ -739,7 +739,7 @@ export default function Home() {
 
                 {/* Portfolio */}
                 <a 
-                  href="https://drive.google.com/file/d/1RiTHtWisPFBvkZQHwatCGfI4Ue2kWeTR/view?usp=sharing"
+                  href="https://drive.google.com/file/d/1G7VRhgFpYFArcqNbxANeZfcwvOg6mp7K/view?usp=sharing"
                   className="social-icon group relative block"
                   data-social-icon="2"
                 >
